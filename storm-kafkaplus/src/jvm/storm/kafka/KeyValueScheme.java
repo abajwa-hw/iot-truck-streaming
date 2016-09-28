@@ -1,6 +1,6 @@
 package storm.kafka;
 
-import backtype.storm.spout.Scheme;
+import org.apache.storm.spout.Scheme;
 
 import java.util.List;
 

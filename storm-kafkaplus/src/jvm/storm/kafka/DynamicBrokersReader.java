@@ -1,7 +1,7 @@
 package storm.kafka;
 
-import backtype.storm.Config;
-import backtype.storm.utils.Utils;
+import org.apache.storm.Config;
+import org.apache.storm.utils.Utils;
 import com.netflix.curator.framework.CuratorFramework;
 import com.netflix.curator.framework.CuratorFrameworkFactory;
 import com.netflix.curator.retry.RetryNTimes;

@@ -1,11 +1,11 @@
 package storm.kafka;
 
-import backtype.storm.Config;
-import backtype.storm.metric.api.CombinedMetric;
-import backtype.storm.metric.api.CountMetric;
-import backtype.storm.metric.api.MeanReducer;
-import backtype.storm.metric.api.ReducedMetric;
-import backtype.storm.spout.SpoutOutputCollector;
+import org.apache.storm.Config;
+import org.apache.storm.metric.api.CombinedMetric;
+import org.apache.storm.metric.api.CountMetric;
+import org.apache.storm.metric.api.MeanReducer;
+import org.apache.storm.metric.api.ReducedMetric;
+import org.apache.storm.spout.SpoutOutputCollector;
 import com.google.common.collect.ImmutableMap;
 import kafka.api.OffsetRequest;
 import kafka.javaapi.consumer.SimpleConsumer;

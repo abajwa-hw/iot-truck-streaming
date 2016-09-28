@@ -1,6 +1,6 @@
 package storm.kafka;
 
-import backtype.storm.spout.SchemeAsMultiScheme;
+import org.apache.storm.spout.SchemeAsMultiScheme;
 import java.util.Arrays;
 import java.util.List;
 

@@ -1,13 +1,14 @@
 package com.hortonworks.streaming.impl.kafka;
 
-import backtype.storm.spout.Scheme;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Values;
+import org.apache.storm.spout.Scheme;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.tuple.Values;
 import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.nio.ByteBuffer;
 
 public class TruckScheme2 implements Scheme {
 
@@ -16,9 +17,9 @@ public class TruckScheme2 implements Scheme {
   private static final Logger LOG = Logger.getLogger(TruckScheme2.class);
 
   @Override
-  public List<Object> deserialize(byte[] bytes) {
+  public List<Object> deserialize(ByteBuffer bytes) {
     try {
-      String truckEvent = new String(bytes, "UTF-8");
+      String truckEvent = new String(bytes.array(), "UTF-8");
       String[] pieces = truckEvent.split("\\|");
 
       Timestamp eventTime = Timestamp.valueOf(pieces[0]);

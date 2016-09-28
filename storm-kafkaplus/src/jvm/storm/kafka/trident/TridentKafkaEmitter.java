@@ -1,11 +1,11 @@
 package storm.kafka.trident;
 
-import backtype.storm.Config;
-import backtype.storm.metric.api.CombinedMetric;
-import backtype.storm.metric.api.MeanReducer;
-import backtype.storm.metric.api.ReducedMetric;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.utils.Utils;
+import org.apache.storm.Config;
+import org.apache.storm.metric.api.CombinedMetric;
+import org.apache.storm.metric.api.MeanReducer;
+import org.apache.storm.metric.api.ReducedMetric;
+import org.apache.storm.task.TopologyContext;
+import org.apache.storm.utils.Utils;
 import com.google.common.collect.ImmutableMap;
 import kafka.javaapi.consumer.SimpleConsumer;
 import kafka.javaapi.message.ByteBufferMessageSet;

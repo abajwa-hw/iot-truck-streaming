@@ -1,7 +1,7 @@
 package storm.kafka;
 
-import backtype.storm.metric.api.IMetric;
-import backtype.storm.utils.Utils;
+import org.apache.storm.metric.api.IMetric;
+import org.apache.storm.utils.Utils;
 import com.google.common.base.Preconditions;
 import kafka.api.FetchRequest;
 import kafka.api.FetchRequestBuilder;

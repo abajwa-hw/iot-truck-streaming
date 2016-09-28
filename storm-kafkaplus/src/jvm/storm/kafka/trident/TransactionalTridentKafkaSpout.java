@@ -1,7 +1,7 @@
 package storm.kafka.trident;
 
-import backtype.storm.task.TopologyContext;
-import backtype.storm.tuple.Fields;
+import org.apache.storm.task.TopologyContext;
+import org.apache.storm.tuple.Fields;
 import storm.kafka.Partition;
 import storm.trident.spout.IPartitionedTridentSpout;
 

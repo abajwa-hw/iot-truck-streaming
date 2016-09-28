@@ -1,6 +1,6 @@
 package storm.kafka;
 
-import backtype.storm.Config;
+import org.apache.storm.Config;
 import com.netflix.curator.test.TestingServer;
 import kafka.javaapi.consumer.SimpleConsumer;
 import org.junit.After;

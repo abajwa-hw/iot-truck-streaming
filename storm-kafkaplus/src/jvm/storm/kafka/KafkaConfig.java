@@ -1,7 +1,7 @@
 package storm.kafka;
 
-import backtype.storm.spout.MultiScheme;
-import backtype.storm.spout.RawMultiScheme;
+import org.apache.storm.spout.MultiScheme;
+import org.apache.storm.spout.RawMultiScheme;
 
 import java.io.Serializable;
 
