@@ -32,7 +32,7 @@ import java.util.Date;
 
 public class PredictionBoltJPMML implements IRichBolt {
 
-  private static final Logger LOG = Logger.getLogger(PredictionBolt.class);
+  //private static final Logger LOG = Logger.getLogger(PredictionBolt.class);
   private String phoenixDriverPath;
   private Driver phoenixDriver;
   private Properties topologyConfig;
@@ -55,12 +55,12 @@ public class PredictionBoltJPMML implements IRichBolt {
   public void execute(Tuple input) {
     String eventType = input.getStringByField("eventType");
     boolean violationPredicted;
-    LOG.info("Entered prediction bolt execute (JPMML Version)...");
+    //LOG.info("Entered prediction bolt execute (JPMML Version)...");
     if (eventType.equals("Normal")) {
       double[] predictionParams = enrichEvent(input);
       //run the input through the model and predict violation
       violationPredicted = evaluateJPMMLModel(modelEvaluator, predictionParams);
-      LOG.info("Prediction is: " + violationPredicted);
+      //LOG.info("Prediction is: " + violationPredicted);
 
       String driverName = input.getStringByField("driverName");
       String routeName = input.getStringByField("routeName");
@@ -182,7 +182,7 @@ public class PredictionBoltJPMML implements IRichBolt {
       pmmlFile = getPmmlModelFromHDFS(new Path(topologyConfig.getProperty("hdfs.url") +
           "/tmp/pmml/TruckDemoModel-pmml.xml"), conf);
     } catch (Exception e) {
-      LOG.error("Couldn't instantiate JPMML model in prediction bolt: " + e.getMessage());
+      //LOG.error("Couldn't instantiate JPMML model in prediction bolt: " + e.getMessage());
       e.printStackTrace();
       throw new RuntimeException(e);
     }

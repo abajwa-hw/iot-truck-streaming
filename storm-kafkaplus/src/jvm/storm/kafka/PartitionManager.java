@@ -1,11 +1,11 @@
 package storm.kafka;
 
-import org.apache.storm.Config;
-import org.apache.storm.metric.api.CombinedMetric;
-import org.apache.storm.metric.api.CountMetric;
-import org.apache.storm.metric.api.MeanReducer;
-import org.apache.storm.metric.api.ReducedMetric;
-import org.apache.storm.spout.SpoutOutputCollector;
+import backtype.storm.Config;
+import backtype.storm.metric.api.CombinedMetric;
+import backtype.storm.metric.api.CountMetric;
+import backtype.storm.metric.api.MeanReducer;
+import backtype.storm.metric.api.ReducedMetric;
+import backtype.storm.spout.SpoutOutputCollector;
 import com.google.common.collect.ImmutableMap;
 import kafka.api.OffsetRequest;
 import kafka.javaapi.consumer.SimpleConsumer;
@@ -20,7 +20,7 @@ import storm.kafka.trident.MaxMetric;
 import java.util.*;
 
 public class PartitionManager {
-    public static final Logger LOG = LoggerFactory.getLogger(PartitionManager.class);
+    //public static final Logger LOG = LoggerFactory.getLogger(PartitionManager.class);
     private final CombinedMetric _fetchAPILatencyMax;
     private final ReducedMetric _fetchAPILatencyMean;
     private final CountMetric _fetchAPICallCount;
@@ -63,27 +63,27 @@ public class PartitionManager {
         String path = committedPath();
         try {
             Map<Object, Object> json = _state.readJSON(path);
-            LOG.info("Read partition information from: " + path +  " --> " + json );
+            //LOG.info("Read partition information from: " + path +  " --> " + json );
             if (json != null) {
                 jsonTopologyId = (String) ((Map<Object, Object>) json.get("topology")).get("id");
                 jsonOffset = (Long) json.get("offset");
             }
         } catch (Throwable e) {
-            LOG.warn("Error reading and/or parsing at ZkNode: " + path, e);
+            //LOG.warn("Error reading and/or parsing at ZkNode: " + path, e);
         }
 
         if (jsonTopologyId == null || jsonOffset == null) { // failed to parse JSON?
             _committedTo = KafkaUtils.getOffset(_consumer, spoutConfig.topic, id.partition, spoutConfig);
-            LOG.info("No partition information found, using configuration to determine offset");
+            //LOG.info("No partition information found, using configuration to determine offset");
         } else if (!topologyInstanceId.equals(jsonTopologyId) && spoutConfig.forceFromStart) {
             _committedTo = KafkaUtils.getOffset(_consumer, spoutConfig.topic, id.partition, spoutConfig.startOffsetTime);
-            LOG.info("Topology change detected and reset from start forced, using configuration to determine offset");
+            //LOG.info("Topology change detected and reset from start forced, using configuration to determine offset");
         } else {
             _committedTo = jsonOffset;
-            LOG.info("Read last commit offset from zookeeper: " + _committedTo + "; old topology_id: " + jsonTopologyId + " - new topology_id: " + topologyInstanceId );
+            //LOG.info("Read last commit offset from zookeeper: " + _committedTo + "; old topology_id: " + jsonTopologyId + " - new topology_id: " + topologyInstanceId );
         }
 
-        LOG.info("Starting " + _partition + " from offset " + _committedTo);
+        //LOG.info("Starting " + _partition + " from offset " + _committedTo);
         _emittedToOffset = _committedTo;
 
         _fetchAPILatencyMax = new CombinedMetric(new MaxMetric());
@@ -140,7 +140,7 @@ public class PartitionManager {
         _fetchAPIMessageCount.incrBy(numMessages);
 
         if (numMessages > 0) {
-            LOG.info("Fetched " + numMessages + " messages from: " + _partition);
+            //LOG.info("Fetched " + numMessages + " messages from: " + _partition);
         }
         for (MessageAndOffset msg : msgs) {
             _pending.add(_emittedToOffset);
@@ -148,7 +148,7 @@ public class PartitionManager {
             _emittedToOffset = msg.nextOffset();
         }
         if (numMessages > 0) {
-            LOG.info("Added " + numMessages + " messages from: " + _partition + " to internal buffers");
+            //LOG.info("Added " + numMessages + " messages from: " + _partition + " to internal buffers");
         }
     }
 
@@ -176,7 +176,7 @@ public class PartitionManager {
     public void commit() {
         long lastCompletedOffset = lastCompletedOffset();
         if (lastCompletedOffset != lastCommittedOffset()) {
-            LOG.info("Writing last completed offset (" + lastCompletedOffset + ") to ZK for " + _partition + " for topology: " + _topologyInstanceId);
+            //LOG.info("Writing last completed offset (" + lastCompletedOffset + ") to ZK for " + _partition + " for topology: " + _topologyInstanceId);
             Map<Object, Object> data = ImmutableMap.builder()
                     .put("topology", ImmutableMap.of("id", _topologyInstanceId,
                             "name", _stormConf.get(Config.TOPOLOGY_NAME)))
@@ -187,9 +187,9 @@ public class PartitionManager {
                     .put("topic", _spoutConfig.topic).build();
             _state.writeJSON(committedPath(), data);
             _committedTo = lastCompletedOffset;
-            LOG.info("Wrote last completed offset (" + lastCompletedOffset + ") to ZK for " + _partition + " for topology: " + _topologyInstanceId);
+            //LOG.info("Wrote last completed offset (" + lastCompletedOffset + ") to ZK for " + _partition + " for topology: " + _topologyInstanceId);
         } else {
-            LOG.info("No new offset for " + _partition + " for topology: " + _topologyInstanceId);
+            //LOG.info("No new offset for " + _partition + " for topology: " + _topologyInstanceId);
         }
     }
 

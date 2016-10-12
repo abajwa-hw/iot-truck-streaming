@@ -1,7 +1,7 @@
 package storm.kafka;
 
-import org.apache.storm.Config;
-import org.apache.storm.utils.Utils;
+import backtype.storm.Config;
+import backtype.storm.utils.Utils;
 import com.netflix.curator.framework.CuratorFramework;
 import com.netflix.curator.framework.CuratorFrameworkFactory;
 import com.netflix.curator.retry.RetryNTimes;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class DynamicBrokersReader {
 
-    public static final Logger LOG = LoggerFactory.getLogger(DynamicBrokersReader.class);
+    //public static final Logger LOG = LoggerFactory.getLogger(DynamicBrokersReader.class);
 
     private CuratorFramework _curator;
     private String _zkPath;
@@ -50,13 +50,13 @@ public class DynamicBrokersReader {
                     Broker hp = getBrokerHost(brokerData);
                     globalPartitionInformation.addPartition(partition, hp);
                 } catch (org.apache.zookeeper.KeeperException.NoNodeException e) {
-                    LOG.error("Node {} does not exist ", path);
+                    //LOG.error("Node {} does not exist ", path);
                 }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        LOG.info("Read partition info from zookeeper: " + globalPartitionInformation);
+        //LOG.info("Read partition info from zookeeper: " + globalPartitionInformation);
         return globalPartitionInformation;
     }
 

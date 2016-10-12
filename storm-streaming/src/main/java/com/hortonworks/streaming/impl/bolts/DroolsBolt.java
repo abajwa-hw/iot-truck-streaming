@@ -27,7 +27,7 @@ import java.util.concurrent.Executors;
 
 public class DroolsBolt implements IRichBolt, AgendaEventListener {
 
-  private static final Logger LOG = Logger.getLogger(DroolsBolt.class);
+  //private static final Logger LOG = Logger.getLogger(DroolsBolt.class);
   long alertGapThreshold = 5000;
   private OutputCollector collector;
   private StatefulKnowledgeSession ksession = null;
@@ -71,7 +71,7 @@ public class DroolsBolt implements IRichBolt, AgendaEventListener {
 
   public void execute(Tuple input) {
 
-    LOG.info("Entered drools bolt execute...");
+    //LOG.info("Entered drools bolt execute...");
     String eventType = input.getStringByField("eventType");
     String driverName = input.getStringByField("driverName");
     String routeName = input.getStringByField("routeName");
@@ -96,7 +96,7 @@ public class DroolsBolt implements IRichBolt, AgendaEventListener {
   }
 
   public void emit(TruckEvent event) {
-    LOG.info("Entered drool bolt emit...");
+    //LOG.info("Entered drool bolt emit...");
     SimpleDateFormat sdf = new SimpleDateFormat();
 
 

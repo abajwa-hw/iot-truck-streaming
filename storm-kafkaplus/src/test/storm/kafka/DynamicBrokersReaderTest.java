@@ -1,6 +1,6 @@
 package storm.kafka;
 
-import org.apache.storm.Config;
+import backtype.storm.Config;
 import com.netflix.curator.framework.CuratorFramework;
 import com.netflix.curator.framework.CuratorFrameworkFactory;
 import com.netflix.curator.retry.ExponentialBackoffRetry;

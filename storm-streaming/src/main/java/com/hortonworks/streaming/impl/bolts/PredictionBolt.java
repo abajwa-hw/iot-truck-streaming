@@ -30,7 +30,7 @@ import java.util.Date;
 
 public class PredictionBolt implements IRichBolt {
 
-  private static final Logger LOG = Logger.getLogger(PredictionBolt.class);
+  //private static final Logger LOG = Logger.getLogger(PredictionBolt.class);
   private String phoenixDriverPath;
   private Driver phoenixDriver;
 
@@ -54,7 +54,7 @@ public class PredictionBolt implements IRichBolt {
 
   public void execute(Tuple input) {
 
-    LOG.info("Entered prediction bolt execute...");
+    //LOG.info("Entered prediction bolt execute...");
     String eventType = input.getStringByField("eventType");
 
     double prediction;
@@ -63,7 +63,7 @@ public class PredictionBolt implements IRichBolt {
       double[] predictionParams = enrichEvent(input);
       prediction = model.predict(Vectors.dense(predictionParams));
 
-      LOG.info("Prediction is: " + prediction);
+      //LOG.info("Prediction is: " + prediction);
 
 
       String driverName = input.getStringByField("driverName");
@@ -200,7 +200,7 @@ public class PredictionBolt implements IRichBolt {
       sparkModelInfo = getSparkModelInfoFromHDFS(new Path(topologyConfig.getProperty("hdfs.url") +
           "/tmp/sparkML_weights"), conf);
     } catch (Exception e) {
-      LOG.error("Couldn't instantiate Spark model in prediction bolt: " + e.getMessage());
+      //LOG.error("Couldn't instantiate Spark model in prediction bolt: " + e.getMessage());
       e.printStackTrace();
 
       throw new RuntimeException(e);

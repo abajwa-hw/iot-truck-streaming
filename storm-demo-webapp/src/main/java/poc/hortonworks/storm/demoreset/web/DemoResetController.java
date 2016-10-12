@@ -20,7 +20,7 @@ public class DemoResetController {
 	
 	@MessageMapping("/resetDemo")
 	public void resetDemo(DemoResetParam param) {
-		LOG.info("truncateHBaseTables value is" + param.isTruncateHbaseTables());
+		//LOG.info("truncateHBaseTables value is" + param.isTruncateHbaseTables());
 		demoResetService.resetDemo(param);
 	}
 }

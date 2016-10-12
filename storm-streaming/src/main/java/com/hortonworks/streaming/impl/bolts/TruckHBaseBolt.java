@@ -22,7 +22,7 @@ public class TruckHBaseBolt implements IRichBolt {
 
   private static final byte[] INCIDENT_RUNNING_TOTAL_COLUMN = Bytes.toBytes("incidentRunningTotal");
   private static final long serialVersionUID = 2946379346389650318L;
-  private static final Logger LOG = Logger.getLogger(TruckHBaseBolt.class);
+  //private static final Logger LOG = Logger.getLogger(TruckHBaseBolt.class);
 
   private static final String DANGEROUS_EVENTS_TABLE_NAME = "driver_dangerous_events";
   private static final String EVENTS_TABLE_COLUMN_FAMILY_NAME = "events";
@@ -45,7 +45,7 @@ public class TruckHBaseBolt implements IRichBolt {
 
   public TruckHBaseBolt(Properties topologyConfig) {
     this.persistAllEvents = Boolean.valueOf(topologyConfig.getProperty("hbase.persist.all.events")).booleanValue();
-    LOG.info("The PersistAllEvents Flag is set to: " + persistAllEvents);
+    //LOG.info("The PersistAllEvents Flag is set to: " + persistAllEvents);
   }
 
   /**
@@ -74,7 +74,7 @@ public class TruckHBaseBolt implements IRichBolt {
 
     } catch (Exception e) {
       String errMsg = "Error retrievinging connection and access to dangerousEventsTable";
-      LOG.error(errMsg, e);
+      //LOG.error(errMsg, e);
       throw new RuntimeException(errMsg, e);
     }
   }
@@ -82,7 +82,7 @@ public class TruckHBaseBolt implements IRichBolt {
   @Override
   public void execute(Tuple input) {
 
-    LOG.info("About to insert tuple[" + input + "] into HBase...");
+    //LOG.info("About to insert tuple[" + input + "] into HBase...");
 
     int driverId = input.getIntegerByField("driverId");
     int truckId = input.getIntegerByField("truckId");
@@ -103,16 +103,16 @@ public class TruckHBaseBolt implements IRichBolt {
         Put put = constructRow(EVENTS_TABLE_COLUMN_FAMILY_NAME, driverId, truckId, eventTime, eventType,
             latitude, longitude, driverName, routeId, routeName);
         this.dangerousEventsTable.put(put);
-        LOG.info("Success inserting event into HBase table[" + DANGEROUS_EVENTS_TABLE_NAME + "]");
+        //LOG.info("Success inserting event into HBase table[" + DANGEROUS_EVENTS_TABLE_NAME + "]");
 
         //Update the running count of all incidents
         incidentTotalCount = this.eventsCountTable.incrementColumnValue(Bytes.toBytes(driverId), Bytes.toBytes
                 (EVENTS_COUNT_TABLE_COLUMN_FAMILY_NAME),
             INCIDENT_RUNNING_TOTAL_COLUMN, 1L);
-        LOG.info("Success inserting event into counts table");
+        //LOG.info("Success inserting event into counts table");
 
       } catch (Exception e) {
-        LOG.error("	Error inserting violation event into HBase table", e);
+        //LOG.error("	Error inserting violation event into HBase table", e);
       }
     }
 
@@ -125,9 +125,9 @@ public class TruckHBaseBolt implements IRichBolt {
         Put put = constructRow(ALL_EVENTS_TABLE_COLUMN_FAMILY_NAME, driverId, truckId, eventTime, eventType,
             latitude, longitude, driverName, routeId, routeName);
         this.eventsTable.put(put);
-        LOG.info("Success inserting event into HBase table[" + EVENTS_TABLE_NAME + "]");
+        //LOG.info("Success inserting event into HBase table[" + EVENTS_TABLE_NAME + "]");
       } catch (Exception e) {
-        LOG.error("	Error inserting event into HBase table[" + EVENTS_TABLE_NAME + "]", e);
+        //LOG.error("	Error inserting event into HBase table[" + EVENTS_TABLE_NAME + "]", e);
       }
 
     }
@@ -194,7 +194,7 @@ public class TruckHBaseBolt implements IRichBolt {
       eventsTable.close();
       connection.close();
     } catch (Exception e) {
-      LOG.error("Error closing connections", e);
+      //LOG.error("Error closing connections", e);
     }
   }
 
@@ -225,7 +225,7 @@ public class TruckHBaseBolt implements IRichBolt {
       }
       return count;
     } catch (Exception e) {
-      LOG.error("Error getting infraction count", e);
+      //LOG.error("Error getting infraction count", e);
       throw new RuntimeException("Error getting infraction count");
     }
   }

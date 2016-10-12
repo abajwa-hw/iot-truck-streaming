@@ -10,7 +10,7 @@
 //
 //public class RouteGenerator implements Route {
 //
-//	private static final Logger LOG = Logger.getLogger(RouteGenerator.class);
+//	//private static final Logger LOG = Logger.getLogger(RouteGenerator.class);
 //	
 //	private List<Location> locations;
 //	private int locationIndex=0;

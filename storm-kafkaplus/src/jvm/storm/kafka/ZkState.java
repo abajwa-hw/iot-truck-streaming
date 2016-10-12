@@ -1,7 +1,7 @@
 package storm.kafka;
 
-import org.apache.storm.Config;
-import org.apache.storm.utils.Utils;
+import backtype.storm.Config;
+import backtype.storm.utils.Utils;
 import com.netflix.curator.framework.CuratorFramework;
 import com.netflix.curator.framework.CuratorFrameworkFactory;
 import com.netflix.curator.retry.RetryNTimes;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ZkState {
-    public static final Logger LOG = LoggerFactory.getLogger(ZkState.class);
+    //public static final Logger LOG = LoggerFactory.getLogger(ZkState.class);
     CuratorFramework _curator;
 
     private CuratorFramework newCurator(Map stateConf) throws Exception {
@@ -49,7 +49,7 @@ public class ZkState {
     }
 
     public void writeJSON(String path, Map<Object, Object> data) {
-        LOG.info("Writing " + path + " the data " + data.toString());
+        //LOG.info("Writing " + path + " the data " + data.toString());
         writeBytes(path, JSONValue.toJSONString(data).getBytes(Charset.forName("UTF-8")));
     }
 

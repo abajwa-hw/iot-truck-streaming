@@ -20,7 +20,7 @@ public class WebSocketBolt implements IRichBolt {
 
 
   private static final long serialVersionUID = -5319490672681173657L;
-  private static final Logger LOG = Logger.getLogger(WebSocketBolt.class);
+  //private static final Logger LOG = Logger.getLogger(WebSocketBolt.class);
 
   private OutputCollector collector;
   private Properties config;
@@ -54,7 +54,7 @@ public class WebSocketBolt implements IRichBolt {
 
   @Override
   public void execute(Tuple input) {
-    LOG.info("About to process tuple[" + input + "]");
+    //LOG.info("About to process tuple[" + input + "]");
 
 
     int driverId = input.getIntegerByField("driverId");
@@ -101,7 +101,7 @@ public class WebSocketBolt implements IRichBolt {
     try {
       event = mapper.writeValueAsString(driverInfraction);
     } catch (Exception e) {
-      LOG.error("Error converting TruckDriverViolationEvent to JSON");
+      //LOG.error("Error converting TruckDriverViolationEvent to JSON");
     }
     return event;
   }
@@ -121,20 +121,20 @@ public class WebSocketBolt implements IRichBolt {
       TextMessage message = session.createTextMessage(event);
       getTopicProducer(session, topic).send(message);
     } catch (JMSException e) {
-      LOG.error("Error sending TruckDriverViolationEvent to topic", e);
+      //LOG.error("Error sending TruckDriverViolationEvent to topic", e);
     } finally {
       if (session != null) {
         try {
           session.close();
         } catch (JMSException e) {
-          LOG.error("Error cleaning up ActiveMQ resources", e);
+          //LOG.error("Error cleaning up ActiveMQ resources", e);
         }
       }
       if (connection != null) {
         try {
           connection.close();
         } catch (JMSException e) {
-          LOG.error("Error closing ActiveMQ connectino", e);
+          //LOG.error("Error closing ActiveMQ connectino", e);
         }
       }
 
@@ -159,7 +159,7 @@ public class WebSocketBolt implements IRichBolt {
       topicProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
       return topicProducer;
     } catch (JMSException e) {
-      LOG.error("Error creating producer for topic", e);
+      //LOG.error("Error creating producer for topic", e);
       throw new RuntimeException("Error creating producer for topic");
     }
   }

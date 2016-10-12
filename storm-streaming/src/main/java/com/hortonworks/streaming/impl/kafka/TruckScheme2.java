@@ -14,7 +14,7 @@ public class TruckScheme2 implements Scheme {
 
   private static final long serialVersionUID = -2990121166902741545L;
 
-  private static final Logger LOG = Logger.getLogger(TruckScheme2.class);
+  //private static final Logger LOG = Logger.getLogger(TruckScheme2.class);
 
   @Override
   public List<Object> deserialize(ByteBuffer bytes) {
@@ -34,9 +34,9 @@ public class TruckScheme2 implements Scheme {
       long correlationId = Long.valueOf(pieces[9]);
       String eventKey = consructKey(driverId, truckId, eventTime);
 
-      LOG.info("Creating a Truck Scheme with driverId[" + driverId + "], driverName[" + driverName + "], routeId[" +
-          routeId + "], routeName[" + routeName + "], truckEvent[" + truckEvent + "], and correlationId[" +
-          correlationId + "]");
+      //LOG.info("Creating a Truck Scheme with driverId[" + driverId + "], driverName[" + driverName + "], routeId[" +
+          //routeId + "], routeName[" + routeName + "], truckEvent[" + truckEvent + "], and correlationId[" +
+          //correlationId + "]");
       return new Values(driverId, truckId, eventTime, eventType, longitude, latitude, eventKey, correlationId,
           driverName, routeId, routeName);
 

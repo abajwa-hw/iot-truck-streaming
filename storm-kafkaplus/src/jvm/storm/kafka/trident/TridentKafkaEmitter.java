@@ -1,11 +1,11 @@
 package storm.kafka.trident;
 
-import org.apache.storm.Config;
-import org.apache.storm.metric.api.CombinedMetric;
-import org.apache.storm.metric.api.MeanReducer;
-import org.apache.storm.metric.api.ReducedMetric;
-import org.apache.storm.task.TopologyContext;
-import org.apache.storm.utils.Utils;
+import backtype.storm.Config;
+import backtype.storm.metric.api.CombinedMetric;
+import backtype.storm.metric.api.MeanReducer;
+import backtype.storm.metric.api.ReducedMetric;
+import backtype.storm.task.TopologyContext;
+import backtype.storm.utils.Utils;
 import com.google.common.collect.ImmutableMap;
 import kafka.javaapi.consumer.SimpleConsumer;
 import kafka.javaapi.message.ByteBufferMessageSet;
@@ -33,7 +33,7 @@ import java.util.Map;
  */
 public class TridentKafkaEmitter {
 
-    public static final Logger LOG = LoggerFactory.getLogger(TridentKafkaEmitter.class);
+    //public static final Logger LOG = LoggerFactory.getLogger(TridentKafkaEmitter.class);
 
     private DynamicPartitionConnections _connections;
     private String _topologyName;
@@ -66,7 +66,7 @@ public class TridentKafkaEmitter {
         try {
             return failFastEmitNewPartitionBatch(attempt, collector, partition, lastMeta);
         } catch (FailedFetchException e) {
-            LOG.warn("Failed to fetch from partition " + partition);
+            //LOG.warn("Failed to fetch from partition " + partition);
             if (lastMeta == null) {
                 return null;
             } else {
@@ -134,7 +134,7 @@ public class TridentKafkaEmitter {
      * @param meta
      */
     private void reEmitPartitionBatch(TransactionAttempt attempt, TridentCollector collector, Partition partition, Map meta) {
-        LOG.info("re-emitting batch, attempt " + attempt);
+        //LOG.info("re-emitting batch, attempt " + attempt);
         String instanceId = (String) meta.get("instanceId");
         if (!_config.forceFromStart || instanceId.equals(_topologyInstanceId)) {
             SimpleConsumer consumer = _connections.register(partition);

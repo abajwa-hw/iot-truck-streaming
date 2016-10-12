@@ -23,28 +23,12 @@
         <active.mq.version>5.9.0</active.mq.version>
         <truck.topology.domain.version>1.0.0-SNAPSHOT</truck.topology.domain.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>2.5.6</spring.version>
+        <!-- <spring.version>2.5.6</spring.version> -->
+        <org.springframework.version>4.0.7.RELEASE</org.springframework.version>
         <junit.version>4.5</junit.version>
         <mail.version>1.4.3</mail.version>
         <log4j.version>1.2.17</log4j.version> 
 
-        <!-- <storm.version>1.0.1.2.5.1.0-9</storm.version>
-        <storm.kafka.version>1.0.1.2.5.1.0-9</storm.kafka.version>
-        <storm.hdfs.version>1.0.1.2.5.1.0-9</storm.hdfs.version>
-        <kafka.version>0.10.0.2.5.1.0-9</kafka.version>
-        <hbase.version>1.1.2.2.5.1.0-9</hbase.version>
-        <hive.version>2.1.0.2.5.1.0-9</hive.version>
-        <hadoop.version>2.7.3.2.5.1.0-9</hadoop.version>
-        <spark.version>1.6.0</spark.version>
-        <phoenix.version>4.7.0.2.5.1.0-9</phoenix.version>
-        <jpmml.version>1.0.22</jpmml.version>
-        <active.mq.version>5.9.0</active.mq.version>
-        <truck.topology.domain.version>1.0.0-SNAPSHOT</truck.topology.domain.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>2.5.6</spring.version>
-        <junit.version>4.5</junit.version>
-        <mail.version>1.4.3</mail.version>
-        <log4j.version>1.2.17</log4j.version> -->
     </properties>
 
     <repositories>
@@ -94,10 +78,10 @@
     <artifactId>jms</artifactId>
     <version>1.1</version>
 	 <exclusions>
-                    <exclusion>
+                    <!-- <exclusion>
                         <groupId>log4j</groupId>
                         <artifactId>log4j</artifactId>
-                    </exclusion>
+                    </exclusion> -->
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -111,10 +95,10 @@
             <artifactId>xercesImpl</artifactId>
             <version>2.9.1</version>
 		<exclusions>
-                    <exclusion>
+                    <!-- <exclusion>
                         <groupId>log4j</groupId>
                         <artifactId>log4j</artifactId>
-                    </exclusion>
+                    </exclusion> -->
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -126,10 +110,10 @@
             <artifactId>xalan</artifactId>
             <version>2.7.1</version>
 		 <exclusions>
-                    <exclusion>
+                    <!-- <exclusion>
                         <groupId>log4j</groupId>
                         <artifactId>log4j</artifactId>
-                    </exclusion>
+                    </exclusion> -->
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -145,10 +129,10 @@
             <artifactId>transport-domain</artifactId>
             <version>${truck.topology.domain.version}</version>
 		<exclusions>
-                    <exclusion>
+                    <!-- <exclusion>
                         <groupId>log4j</groupId>
                         <artifactId>log4j</artifactId>
-                    </exclusion>
+                    </exclusion> -->
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -161,19 +145,19 @@
 	    <artifactId>kafka_2.10</artifactId>
 	    <version>${kafka.version}</version>
             	<exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>org.apache.zookeeper</groupId>
                     <artifactId>zookeeper</artifactId>
                 </exclusion> 
                 <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
-            	</exclusions>
+                </exclusion>                             	
+                 <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>-->
+            	</exclusions> 
 	</dependency>	
 		
         <!-- Storm Dependencies -->
@@ -183,7 +167,7 @@
             <version>${storm.version}</version>
             <scope>provided</scope>
             	<exclusions>
-		<exclusion>
+		        <!-- <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>log4j-over-slf4j</artifactId>
                 </exclusion>
@@ -191,6 +175,7 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
+                 
                 <exclusion>
 			    	<groupId>org.apache.logging.log4j</groupId>
 			        <artifactId>log4j-core</artifactId>                	
@@ -198,12 +183,11 @@
                 <exclusion>
 					<groupId>org.apache.logging.log4j</groupId>
 	        		<artifactId>log4j-api</artifactId>                
-                
                 </exclusion>
                 <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
 
@@ -215,7 +199,7 @@
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-kafka</artifactId>
             <version>${storm.kafka.version}</version>
-		 <exclusions>
+		<!-- <exclusions>
                  <exclusion>
                      <groupId>org.slf4j</groupId>
                      <artifactId>log4j-over-slf4j</artifactId>
@@ -224,11 +208,11 @@
                      <groupId>org.slf4j</groupId>
                      <artifactId>slf4j-log4j12</artifactId>
                  </exclusion>
-                <exclusion>
+                 <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
-		 </exclusions>
+                </exclusion> 
+		 </exclusions> -->
         </dependency>
 
 
@@ -245,10 +229,10 @@
                      <groupId>org.slf4j</groupId>
                      <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> --> 
              	</exclusions>
          </dependency>
 
@@ -257,10 +241,10 @@
              <artifactId>drools-core</artifactId>
              <version>5.5.0.Final</version>
              	<exclusions>
-                    <exclusion>
+                    <!-- <exclusion>
                         <groupId>log4j</groupId>
                         <artifactId>log4j</artifactId>
-                    </exclusion>
+                    </exclusion> -->
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -272,10 +256,10 @@
              <artifactId>drools-compiler</artifactId>
              <version>5.5.0.Final</version>
              	<exclusions>
-                    <exclusion>
+                    <!-- <exclusion>
                         <groupId>log4j</groupId>
                         <artifactId>log4j</artifactId>
-                    </exclusion>
+                    </exclusion> -->
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -289,10 +273,10 @@
              <artifactId>knowledge-api</artifactId>
              <version>5.5.0.Final</version>
              	<exclusions>
-                    <exclusion>
+                    <!-- <exclusion>
                         <groupId>log4j</groupId>
                         <artifactId>log4j</artifactId>
-                    </exclusion>
+                    </exclusion> -->
                     <exclusion>
                         <groupId>org.slf4j</groupId>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -315,10 +299,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
 
@@ -336,10 +320,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
 
@@ -358,10 +342,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>log4j-over-slf4j</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
 
@@ -379,10 +363,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
         <!--
@@ -416,10 +400,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
 
@@ -444,10 +428,10 @@
                     <groupId>org.apache.calcite</groupId>
                     <artifactId>calcite-avatica</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
       		</exclusions>
     	</dependency>
         
@@ -473,10 +457,10 @@
                     <groupId>org.apache.calcite</groupId>
                     <artifactId>calcite-core</artifactId>
             	</exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
 	</dependency>
 	
@@ -502,10 +486,10 @@
                     <groupId>org.apache.calcite</groupId>
                     <artifactId>calcite-avatica</artifactId>
             	</exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
 		</exclusions>
 	</dependency>
 
@@ -523,10 +507,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
 
@@ -544,10 +528,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
 
@@ -564,10 +548,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
             	</exclusions>
         </dependency>
 
@@ -586,10 +570,10 @@
        	    	    <groupId>org.slf4j</groupId>
             	    <artifactId>slf4j-log4j12</artifactId>
        		</exclusion>
-                <exclusion>
+                <!-- <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
+                </exclusion> -->
     		</exclusions>
 	</dependency>
 
@@ -674,6 +658,14 @@
                 </exclusion>
             	</exclusions>
         </dependency>
+
+	<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-context-support</artifactId>
+<version>${org.springframework.version}</version>
+<scope>test</scope>
+</dependency>
+
 
         <!-- End of Other -->
 

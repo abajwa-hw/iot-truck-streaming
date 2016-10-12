@@ -24,7 +24,7 @@ public class FileTimeRotationPolicy implements FileRotationPolicy {
    */
   private static final long serialVersionUID = 2511856964496167738L;
 
-  private static final Logger LOG = Logger.getLogger(FileTimeRotationPolicy.class);
+  //private static final Logger LOG = Logger.getLogger(FileTimeRotationPolicy.class);
   private long maxMilliSeconds;
   private long lastCheckpoint = new Long((new Date()).getTime());
   public FileTimeRotationPolicy(float count, Units units) {

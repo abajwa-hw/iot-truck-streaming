@@ -1,19 +1,10 @@
 
-# User configured section
 
 # Ambari configuration
-host='sandbox.hortonworks.com:8080'
-cluster='Sandbox'
+host='abajwa-hdf-qe-hdfdemo-1.openstacklocal:8080'
 user='admin'
 pass='admin'
 
-# End user configured section
-
-
-# Sandbox hostname override - if the user doesn't edit this file, and runs on sandbox, we can make it work with known values
-if [ `hostname` = sandbox.hortonworks.com ]; then
-        cluster='Sandbox'
-		host='sandbox.hortonworks.com:8080'
-fi
-
-#TODO: Actually make these environment variables? Or, add this to config.properties instead.
+#auto detect cluster name
+output=`curl -u $user:$pass -i -H 'X-Requested-By: ambari'  http://$host/api/v1/clusters`
+cluster=`echo $output | sed -n 's/.*"cluster_name" : "\([^\"]*\)".*/\1/p'`

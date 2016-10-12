@@ -1,7 +1,7 @@
 package storm.kafka;
 
-import org.apache.storm.spout.SchemeAsMultiScheme;
-import org.apache.storm.utils.Utils;
+import backtype.storm.spout.SchemeAsMultiScheme;
+import backtype.storm.utils.Utils;
 import com.google.common.collect.ImmutableMap;
 import kafka.api.OffsetRequest;
 import kafka.javaapi.consumer.SimpleConsumer;

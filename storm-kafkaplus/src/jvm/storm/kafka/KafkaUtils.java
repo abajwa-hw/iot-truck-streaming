@@ -1,7 +1,7 @@
 package storm.kafka;
 
-import org.apache.storm.metric.api.IMetric;
-import org.apache.storm.utils.Utils;
+import backtype.storm.metric.api.IMetric;
+import backtype.storm.utils.Utils;
 import com.google.common.base.Preconditions;
 import kafka.api.FetchRequest;
 import kafka.api.FetchRequestBuilder;
@@ -26,7 +26,7 @@ import java.util.*;
 
 public class KafkaUtils {
 
-    public static final Logger LOG = LoggerFactory.getLogger(KafkaUtils.class);
+    //public static final Logger LOG = LoggerFactory.getLogger(KafkaUtils.class);
     private static final int NO_OFFSET = -5;
 
 
@@ -90,13 +90,13 @@ public class KafkaUtils {
                         Partition partition = e.getKey();
                         SimpleConsumer consumer = _connections.getConnection(partition);
                         if (consumer == null) {
-                            LOG.warn("partitionToOffset contains partition not found in _connections. Stale partition data?");
+                            //LOG.warn("partitionToOffset contains partition not found in _connections. Stale partition data?");
                             return null;
                         }
                         long earliestTimeOffset = getOffset(consumer, _topic, partition.partition, kafka.api.OffsetRequest.EarliestTime());
                         long latestTimeOffset = getOffset(consumer, _topic, partition.partition, kafka.api.OffsetRequest.LatestTime());
                         if (earliestTimeOffset == 0 || latestTimeOffset == 0) {
-                            LOG.warn("No data found in Kafka Partition " + partition.getId());
+                            //LOG.warn("No data found in Kafka Partition " + partition.getId());
                             return null;
                         }
                         long latestEmittedOffset = e.getValue();
@@ -116,10 +116,10 @@ public class KafkaUtils {
                     ret.put("totalLatestEmittedOffset", totalLatestEmittedOffset);
                     return ret;
                 } else {
-                    LOG.info("Metrics Tick: Not enough data to calculate spout lag.");
+                    //LOG.info("Metrics Tick: Not enough data to calculate spout lag.");
                 }
             } catch (Throwable t) {
-                LOG.warn("Metrics Tick: Exception when computing kafkaOffset metric.", t);
+                //LOG.warn("Metrics Tick: Exception when computing kafkaOffset metric.", t);
             }
             return null;
         }
@@ -157,13 +157,13 @@ public class KafkaUtils {
                 KafkaError error = KafkaError.getError(fetchResponse.errorCode(topic, partitionId));
                 if (error.equals(KafkaError.OFFSET_OUT_OF_RANGE) && config.useStartOffsetTimeIfOffsetOutOfRange && errors == 0) {
                     long startOffset = getOffset(consumer, topic, partitionId, config.startOffsetTime);
-                    LOG.warn("Got fetch request with offset out of range: [" + offset + "]; " +
-                            "retrying with default start offset time from configuration. " +
-                            "configured start offset time: [" + config.startOffsetTime + "] offset: [" + startOffset + "]");
+                    //LOG.warn("Got fetch request with offset out of range: [" + offset + "]; " +
+                          //  "retrying with default start offset time from configuration. " +
+                         //   "configured start offset time: [" + config.startOffsetTime + "] offset: [" + startOffset + "]");
                     offset = startOffset;
                 } else {
                     String message = "Error fetching data from [" + partition + "] for topic [" + topic + "]: [" + error + "]";
-                    LOG.error(message);
+                    //LOG.error(message);
                     throw new FailedFetchException(message);
                 }
             } else {
@@ -192,7 +192,7 @@ public class KafkaUtils {
         List<Partition> partitions = partitionInformation.getOrderedPartitions();
         int numPartitions = partitions.size();
         if (numPartitions < totalTasks) {
-            LOG.warn("there are more tasks than partitions (tasks: " + totalTasks + "; partitions: " + numPartitions + "), some tasks will be idle");
+            //LOG.warn("there are more tasks than partitions (tasks: " + totalTasks + "; partitions: " + numPartitions + "), some tasks will be idle");
         }
         List<Partition> taskPartitions = new ArrayList<Partition>();
         for (int i = taskIndex; i < numPartitions; i += totalTasks) {
@@ -206,9 +206,9 @@ public class KafkaUtils {
     private static void logPartitionMapping(int totalTasks, int taskIndex, List<Partition> taskPartitions) {
         String taskPrefix = taskId(taskIndex, totalTasks);
         if (taskPartitions.isEmpty()) {
-            LOG.warn(taskPrefix + "no partitions assigned");
+            //LOG.warn(taskPrefix + "no partitions assigned");
         } else {
-            LOG.info(taskPrefix + "assigned " + taskPartitions);
+            //LOG.info(taskPrefix + "assigned " + taskPartitions);
         }
     }
 

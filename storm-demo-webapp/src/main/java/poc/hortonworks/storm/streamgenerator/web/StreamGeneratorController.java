@@ -11,7 +11,7 @@ import poc.hortonworks.storm.streamgenerator.service.StreamGeneratorService;
 @Controller
 public class StreamGeneratorController {
 
-	private static final Logger LOG = Logger.getLogger(StreamGeneratorController.class);
+	//private static final Logger LOG = Logger.getLogger(StreamGeneratorController.class);
 	
 	private StreamGeneratorService streamGeneratorService;
 	
@@ -22,7 +22,7 @@ public class StreamGeneratorController {
 
 	@MessageMapping("/mapTruckRoutes")
 	public void mapTruckRoutes(StreamGeneratorParam param) {
-		LOG.info("Starting Mapping Truck Routes...");
+		//LOG.info("Starting Mapping Truck Routes...");
 		streamGeneratorService.generateTruckEventsStream(param);
 	}
 	

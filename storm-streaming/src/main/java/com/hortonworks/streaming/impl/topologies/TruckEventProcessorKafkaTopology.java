@@ -25,7 +25,7 @@ import org.apache.storm.kafka.ZkHosts;
 
 public class TruckEventProcessorKafkaTopology extends BaseTruckEventTopology {
 
-  private static final Logger LOG = Logger.getLogger(TruckEventProcessorKafkaTopology.class);
+  //private static final Logger LOG = Logger.getLogger(TruckEventProcessorKafkaTopology.class);
   private String predictionBoltName = "prediction_bolt";
 
   public TruckEventProcessorKafkaTopology(String configFileLocation) throws Exception {
@@ -85,7 +85,7 @@ public class TruckEventProcessorKafkaTopology extends BaseTruckEventTopology {
     try {
       StormSubmitter.submitTopology("truck-event-processor", conf, builder.createTopology());
     } catch (Exception e) {
-      LOG.error("Error submiting Topology", e);
+      //LOG.error("Error submiting Topology", e);
     }
 
   }

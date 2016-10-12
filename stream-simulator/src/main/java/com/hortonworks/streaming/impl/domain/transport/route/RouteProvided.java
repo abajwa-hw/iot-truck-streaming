@@ -9,7 +9,7 @@ import com.hortonworks.streaming.impl.domain.gps.Location;
 
 public class RouteProvided implements Route {
 
-	private static final Logger LOG = Logger.getLogger(RouteProvided.class);
+	//private static final Logger LOG = Logger.getLogger(RouteProvided.class);
 	
 	private List<Location> locations;
 	private int locationIndex=0;
@@ -33,13 +33,13 @@ public class RouteProvided implements Route {
 		Location location = null;
 		if(locationIndex == locations.size()) {
 			//go background if if we got the end
-			LOG.info("Revering Direction..");
+			//LOG.info("Revering Direction..");
 			locationIndex--;
 			forward = false;
 			routeEnded = true;
 		} else if(locationIndex == -1) {
 			//go forward
-			LOG.info("Going Original Direction...");
+			//LOG.info("Going Original Direction...");
 			locationIndex++;
 			forward=true;
 			routeEnded = true;

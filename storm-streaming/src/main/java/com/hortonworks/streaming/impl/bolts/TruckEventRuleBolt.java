@@ -16,7 +16,7 @@ public class TruckEventRuleBolt implements IRichBolt {
 
 
   private static final long serialVersionUID = 6816706717943954742L;
-  private static final Logger LOG = Logger.getLogger(TruckEventRuleBolt.class);
+  //private static final Logger LOG = Logger.getLogger(TruckEventRuleBolt.class);
 
   private OutputCollector collector;
   private TruckEventRuleEngine ruleEngine;
@@ -45,8 +45,8 @@ public class TruckEventRuleBolt implements IRichBolt {
     long correlationId = input.getLongByField("correlationId");
 
 
-    LOG.info("Processing truck event[" + eventType + "]  for driverId[" + driverId + "], truck[" + truckId + "], " +
-        "route[" + routeName + "], correlationId[" + correlationId + "]");
+    //LOG.info("Processing truck event[" + eventType + "]  for driverId[" + driverId + "], truck[" + truckId + "], " +
+        //"route[" + routeName + "], correlationId[" + correlationId + "]");
     ruleEngine.processEvent(driverId, driverName, routeId, truckId, eventTime, eventType, longitude, latitude,
         correlationId, routeName);
     collector.ack(input);

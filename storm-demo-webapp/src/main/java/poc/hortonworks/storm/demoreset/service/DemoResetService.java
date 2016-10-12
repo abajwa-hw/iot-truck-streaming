@@ -64,7 +64,7 @@ public class DemoResetService {
 			driverEventsCountTable = (HTable) connection.getTable(EVENTS_COUNT_TABLE_NAME);
 
 		} catch (Exception e) {
-			LOG.error("Error connectiong to HBase", e);
+			//LOG.error("Error connectiong to HBase", e);
 			throw new RuntimeException("Error Connecting to HBase", e);
 		}	
 	}
@@ -90,7 +90,7 @@ public class DemoResetService {
 			truncateTable(driverEventsTable);
 			truncateTable(driverEventsCountTable);
 		} catch (Exception  e) {
-			LOG.error("Error truncating HBase tables", e);
+			//LOG.error("Error truncating HBase tables", e);
 			//do nothing
 		}			
 	}

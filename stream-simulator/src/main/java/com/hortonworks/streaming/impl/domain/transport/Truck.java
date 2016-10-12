@@ -21,7 +21,7 @@ import com.hortonworks.streaming.impl.messages.EmitEvent;
 public class Truck extends AbstractEventEmitter {
 
   private static final long serialVersionUID = 9157180698115417087L;
-  private static final Logger LOG = Logger.getLogger(Truck.class);
+  //private static final Logger LOG = Logger.getLogger(Truck.class);
 
   private Driver driver;
   private int truckId;
@@ -44,11 +44,11 @@ public class Truck extends AbstractEventEmitter {
     this.numberOfEventsToGenerate = numberOfEvents;
     this.demoId = demoId;
 
-    LOG.info("New Truck Instance[" + truckId + "] with Driver[" + driver
-        .getDriverName() + "] " +
-        "has started  new Route[" + driver.getRoute().getRouteName() + "], " +
-        "RouteId[" +
-        driver.getRoute().getRouteId() + "]");
+    //LOG.info("New Truck Instance[" + truckId + "] with Driver[" + driver
+        //.getDriverName() + "] " +
+        //"has started  new Route[" + driver.getRoute().getRouteName() + "], " +
+        //"RouteId[" +
+        //driver.getRoute().getRouteId() + "]");
   }
 
 
@@ -75,32 +75,32 @@ public class Truck extends AbstractEventEmitter {
     try {
       if (getDriver().getRouteTraversalCount() > TruckConfiguration
           .MAX_ROUTE_TRAVERSAL_COUNT) {
-        LOG.info("The Driver[" + getDriver().getDriverName() + "] for Truck["
-            + truckId + "] needs to be have its Route[" + getDriver()
-            .getRoute().getRouteName() + "] changed.");
+        //LOG.info("The Driver[" + getDriver().getDriverName() + "] for Truck["
+           // + truckId + "] needs to be have its Route[" + getDriver()
+           // .getRoute().getRouteName() + "] changed.");
         Route newRoute = TruckConfiguration.freeRoutePool.poll();
         while (newRoute == null) {
-          LOG.info("The Driver[" + getDriver().getDriverName() + "] for " +
-              "Truck[" + truckId + "] is going to wait 5 seconds for a new " +
-              "route to be abailable");
+          //LOG.info("The Driver[" + getDriver().getDriverName() + "] for " +
+            //  "Truck[" + truckId + "] is going to wait 5 seconds for a new " +
+            //  "route to be abailable");
           Thread.sleep(5000);
           newRoute = TruckConfiguration.freeRoutePool.poll();
         }
         Route oldRoute = getDriver().getRoute();
         TruckConfiguration.freeRoutePool.offer(oldRoute);
-        LOG.info("The Driver[" + getDriver().getDriverName() + "] for Truck["
-            + truckId + "] releasing old Route[" + oldRoute.getRouteName() +
-            "], RouteId[" + oldRoute.getRouteId() + "].");
+        //LOG.info("The Driver[" + getDriver().getDriverName() + "] for Truck["
+          //  + truckId + "] releasing old Route[" + oldRoute.getRouteName() +
+          //  "], RouteId[" + oldRoute.getRouteId() + "].");
 
         getDriver().provideRoute(newRoute);
-        LOG.info("The Driver[" + getDriver().getDriverName() + "] for Truck["
-            + truckId + "] found a new Route[" + getDriver().getRoute()
-            .getRouteName() + "], RouteId[" + getDriver().getRoute()
-            .getRouteId() + "].");
+        //LOG.info("The Driver[" + getDriver().getDriverName() + "] for Truck["
+          //  + truckId + "] found a new Route[" + getDriver().getRoute()
+          //  .getRouteName() + "], RouteId[" + getDriver().getRoute()
+          //  .getRouteId() + "].");
       }
     } catch (Exception e) {
-      LOG.error("Error Changing route for Driver[" + getDriver()
-          .getDriverName() + "] for Truck[" + truckId + "]");
+      //LOG.error("Error Changing route for Driver[" + getDriver()
+        //  .getDriverName() + "] for Truck[" + truckId + "]");
     }
   }
 
@@ -108,8 +108,8 @@ public class Truck extends AbstractEventEmitter {
   private void changeTruckIfRequired() {
     if (getDriver().getRoute().routeEnded()) {
 
-      LOG.info("Route has ended for Driver[" + getDriver().getDriverId() + "]" +
-          " on Truck[" + truckId + "]");
+      //LOG.info("Route has ended for Driver[" + getDriver().getDriverId() + "]" +
+          //" on Truck[" + truckId + "]");
       Integer lastTruckId = new Integer(truckId);
       Integer nextFreeTruck = TruckConfiguration.freeTruckPool.poll();
 
@@ -125,10 +125,10 @@ public class Truck extends AbstractEventEmitter {
       //increment the routeTraversal count
       getDriver().incrementRootTraversalCount();
 
-      LOG.info("The Driver[" + getDriver().getDriverName() + "] has new " +
-          "Truck[" + truckId + "] with[" + getDriver().getRoute()
-          .getRouteName() + "] traversed " + getDriver()
-          .getRouteTraversalCount() + " times.");
+      //LOG.info("The Driver[" + getDriver().getDriverName() + "] has new " +
+         // "Truck[" + truckId + "] with[" + getDriver().getRoute()
+         // .getRouteName() + "] traversed " + getDriver()
+         // .getRouteTraversalCount() + " times.");
     }
   }
 
@@ -184,8 +184,8 @@ public class Truck extends AbstractEventEmitter {
               actor, generateEvent(), this.context().system().dispatcher(),
               this.getSender());
         }
-        LOG.info("Truck[" + truckId + "] with Driver[" + driver.getDriverName
-            () + " ] has stopped its route");
+        //LOG.info("Truck[" + truckId + "] with Driver[" + driver.getDriverName
+           // () + " ] has stopped its route");
       }
 
     }

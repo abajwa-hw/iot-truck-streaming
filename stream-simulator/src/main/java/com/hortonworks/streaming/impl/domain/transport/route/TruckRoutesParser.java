@@ -27,11 +27,11 @@ import com.hortonworks.streaming.impl.domain.transport.route.jaxb.Placemark;
 
 public class TruckRoutesParser {
 	
-	private static final Logger LOG = Logger.getLogger(TruckRoutesParser.class);
+	//private static final Logger LOG = Logger.getLogger(TruckRoutesParser.class);
 	private static final DecimalFormat numberFormat = new DecimalFormat("#.00");
 
 	public Route parseRoute(String routeFile) {
-        LOG.info("Processing Route File["+routeFile+"]");
+        //LOG.info("Processing Route File["+routeFile+"]");
 		Route route = null;
 		try {
 			JAXBContext jc = JAXBContext.newInstance(Kml.class);
@@ -52,15 +52,15 @@ public class TruckRoutesParser {
 				String longitude = numberFormat.format(Double.valueOf(coord[1]));
 				locations.add(new Location(Double.valueOf(latitude), Double.valueOf(longitude), 0));
 			}
-			LOG.info("Route File["+routeFile +"] has " + locations.size() + " coordinates in the route "); 
+			//LOG.info("Route File["+routeFile +"] has " + locations.size() + " coordinates in the route "); 
 			route = new RouteProvided(routeName, locations);
 		} catch (FileNotFoundException e) {
 			String errorMessage = "Error Opening routeFile["+routeFile+"]";
-			LOG.error(errorMessage, e);
+			//LOG.error(errorMessage, e);
 			throw new RuntimeException(errorMessage, e);
 		} catch (JAXBException e) {
 			String errorMessage = "JaxB exception for routeFile"+routeFile+"]";
-			LOG.error(errorMessage, e);
+			//LOG.error(errorMessage, e);
 			throw new RuntimeException(errorMessage, e);
 		}
 		return route;

@@ -1,10 +1,10 @@
 package storm.kafka.bolt;
 
-import org.apache.storm.task.OutputCollector;
-import org.apache.storm.task.TopologyContext;
-import org.apache.storm.topology.OutputFieldsDeclarer;
-import org.apache.storm.topology.base.BaseRichBolt;
-import org.apache.storm.tuple.Tuple;
+import backtype.storm.task.OutputCollector;
+import backtype.storm.task.TopologyContext;
+import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.topology.base.BaseRichBolt;
+import backtype.storm.tuple.Tuple;
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
@@ -26,7 +26,7 @@ import java.util.Properties;
  */
 public class KafkaBolt<K, V> extends BaseRichBolt {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaBolt.class);
+    //private static final Logger LOG = LoggerFactory.getLogger(KafkaBolt.class);
 
     public static final String TOPIC = "topic";
     public static final String KAFKA_BROKER_PROPERTIES = "kafka.broker.properties";
@@ -59,7 +59,7 @@ public class KafkaBolt<K, V> extends BaseRichBolt {
         try {
             producer.send(new KeyedMessage<K, V>(topic, key, message));
         } catch (Exception ex) {
-            LOG.error("Could not send message with key '" + key + "' and value '" + message + "'", ex);
+            //LOG.error("Could not send message with key '" + key + "' and value '" + message + "'", ex);
         } finally {
             collector.ack(input);
         }

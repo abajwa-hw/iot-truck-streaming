@@ -26,7 +26,7 @@ public class HiveTablePartitionAction implements RotationAction {
 
   private static final long serialVersionUID = 2725320320183384402L;
 
-  private static final Logger LOG = Logger.getLogger(HiveTablePartitionAction.class);
+  //private static final Logger LOG = Logger.getLogger(HiveTablePartitionAction.class);
   private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
   private String sourceMetastoreUrl;
@@ -96,7 +96,7 @@ public class HiveTablePartitionAction implements RotationAction {
 
     String partitionValue = datePartitionName + "-" + hourPartitionName;
 
-    LOG.info("About to add file[" + path + "] to a partitions[" + partitionValue + "]");
+    //LOG.info("About to add file[" + path + "] to a partitions[" + partitionValue + "]");
 
     StringBuilder ddl = new StringBuilder();
     ddl.append(" load data inpath ")
@@ -111,7 +111,7 @@ public class HiveTablePartitionAction implements RotationAction {
       execHiveDDL(ddl.toString());
     } catch (Exception e) {
       String errorMessage = "Error exexcuting query[" + ddl.toString() + "]";
-      LOG.error(errorMessage, e);
+      //LOG.error(errorMessage, e);
       //throw new RuntimeException(errorMessage, e);
     }
   }
@@ -126,7 +126,7 @@ public class HiveTablePartitionAction implements RotationAction {
   }
 
   public void execHiveDDL(String ddl) throws Exception {
-    LOG.info("Executing ddl = " + ddl);
+    //LOG.info("Executing ddl = " + ddl);
 
     Driver hiveDriver = new Driver();
     CommandProcessorResponse response = hiveDriver.run(ddl);

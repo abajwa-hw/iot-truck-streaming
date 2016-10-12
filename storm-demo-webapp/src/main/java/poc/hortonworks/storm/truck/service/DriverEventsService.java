@@ -32,7 +32,7 @@ public class DriverEventsService {
 	private static final String DRIVER_EVENTS_COUNT_TABLE = "driver_dangerous_events_count";
 	private static String DRIVER_EVENTS_COUNT_COLUMN_FAMILY_NAME = "counters";	
 	
-	private static final Logger LOG = Logger.getLogger(DriverEventsService.class);
+	//private static final Logger LOG = Logger.getLogger(DriverEventsService.class);
 	
 	private HTableInterface driverEventsTable;
 	private HTableInterface driverEventsCountTable;
@@ -55,7 +55,7 @@ public class DriverEventsService {
 			driverEventsTable = connection.getTable(DRIVER_EVENTS_TABLE);
 			driverEventsCountTable = connection.getTable(DRIVER_EVENTS_COUNT_TABLE);
 		} catch (Exception e) {
-			LOG.error("Error connectiong to HBase", e);
+			//LOG.error("Error connectiong to HBase", e);
 			throw new RuntimeException("Error Connecting to HBase", e);
 		} 
 	}
@@ -95,7 +95,7 @@ public class DriverEventsService {
 			}
 			return eventsMap.values();
 		} catch (Exception e) {
-			LOG.error("Error getting driver events", e);
+			//LOG.error("Error getting driver events", e);
 			throw new RuntimeException("Error getting driver events", e);
 		}
 	}
@@ -108,7 +108,7 @@ public class DriverEventsService {
 			long count = Bytes.toLong(result.getValue(Bytes.toBytes(DRIVER_EVENTS_COUNT_COLUMN_FAMILY_NAME), Bytes.toBytes("incidentRunningTotal")));
 			return count;
 		} catch (Exception e) {
-			LOG.error("Error getting infraction count", e);
+			//LOG.error("Error getting infraction count", e);
 			throw new RuntimeException("Error getting infraction count");
 		}
 	}

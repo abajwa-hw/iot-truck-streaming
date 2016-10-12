@@ -1,7 +1,7 @@
 package storm.kafka.trident;
 
 
-import org.apache.storm.metric.api.ICombiner;
+import backtype.storm.metric.api.ICombiner;
 
 public class MaxMetric implements ICombiner<Long> {
     @Override

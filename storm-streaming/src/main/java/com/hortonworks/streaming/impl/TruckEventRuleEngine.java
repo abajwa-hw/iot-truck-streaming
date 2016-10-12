@@ -19,7 +19,7 @@ public class TruckEventRuleEngine implements Serializable {
 
   public static final int MAX_UNSAFE_EVENTS = 5;
   private static final long serialVersionUID = -5526455911057368428L;
-  private static final Logger LOG = Logger.getLogger(TruckEventRuleEngine.class);
+  //private static final Logger LOG = Logger.getLogger(TruckEventRuleEngine.class);
   public Map<Integer, LinkedList<String>> driverEvents = new HashMap<Integer, LinkedList<String>>();
   private long lastCorrelationId;
 
@@ -39,10 +39,10 @@ public class TruckEventRuleEngine implements Serializable {
 
     this.sendAlertToEmail = Boolean.valueOf(config.getProperty("notification.email")).booleanValue();
     if (sendAlertToEmail) {
-      LOG.info("TruckEventRuleEngine configured to send email on alert");
+      //LOG.info("TruckEventRuleEngine configured to send email on alert");
       configureEmail(config);
     } else {
-      LOG.info("TruckEventRuleEngine configured to NOT send alerts");
+      //LOG.info("TruckEventRuleEngine configured to NOT send alerts");
     }
 
 
@@ -56,7 +56,7 @@ public class TruckEventRuleEngine implements Serializable {
 
 
     } else {
-      LOG.info("TruckEventRuleEngine configured to alerts to Topic");
+      //LOG.info("TruckEventRuleEngine configured to alerts to Topic");
     }
   }
 
@@ -75,14 +75,14 @@ public class TruckEventRuleEngine implements Serializable {
     if (!event.equals("Normal")) {
       if (driverEvents.get(driverId).size() < MAX_UNSAFE_EVENTS) {
         driverEvents.get(driverId).push(eventTime + " " + event);
-        LOG.info("Driver[" + driverId + "] " + driverName + " has an unsafe event and now has the following unsfae " +
-            "events " + driverEvents.get(driverId).size());
+        //LOG.info("Driver[" + driverId + "] " + driverName + " has an unsafe event and now has the following unsfae " +
+            //"events " + driverEvents.get(driverId).size());
       } else {
-        LOG.info("Driver[" + driverId + "] has exceed max events...");
+        //LOG.info("Driver[" + driverId + "] has exceed max events...");
         try {
           // In this case they've had more than 5 unsafe events
-          LOG.info("UNSAFE DRIVING DETECTED FOR DRIVER ID: "
-              + driverId);
+          //LOG.info("UNSAFE DRIVING DETECTED FOR DRIVER ID: "
+              // + driverId);
           StringBuffer events = new StringBuffer();
           for (String unsafeEvent : driverEvents.get(driverId)) {
             events.append(unsafeEvent + "\n");
@@ -94,8 +94,8 @@ public class TruckEventRuleEngine implements Serializable {
           if (sendAlertToTopic)
             sendAlertToTopic(driverName, driverId, events, truckId, eventTime.getTime(), routeId, routeName);
         } catch (Exception e) {
-          LOG.error("Error occured while sending notificaiton email: "
-              + e.getMessage());
+          //LOG.error("Error occured while sending notificaiton email: "
+              // + e.getMessage());
         } finally {
           driverEvents.get(driverId).clear();
         }
@@ -107,8 +107,8 @@ public class TruckEventRuleEngine implements Serializable {
     this.eventMailer = new EventMailer(config);
     this.email = config.getProperty("notification.email.address");
     this.subject = config.getProperty("notification.email.subject");
-    LOG.info("Initializing rule engine with email: " + email
-        + " subject: " + subject);
+    //LOG.info("Initializing rule engine with email: " + email
+       // + " subject: " + subject);
   }
 
   private void sendAlertToTopic(String driverName, int driverId, StringBuffer events, int truckId, long timeStamp,
@@ -129,7 +129,7 @@ public class TruckEventRuleEngine implements Serializable {
       ObjectMapper mapper = new ObjectMapper();
       jsonAlert = mapper.writeValueAsString(alert);
     } catch (Exception e) {
-      LOG.error("Error converting DriverAlertNotification to JSON", e);
+      //LOG.error("Error converting DriverAlertNotification to JSON", e);
       return;
     }
 
@@ -144,14 +144,14 @@ public class TruckEventRuleEngine implements Serializable {
       TextMessage message = session.createTextMessage(event);
       getTopicProducer(session).send(message);
     } catch (JMSException e) {
-      LOG.error("Error sending TruckDriverViolationEvent to topic", e);
+      //LOG.error("Error sending TruckDriverViolationEvent to topic", e);
       return;
     } finally {
       if (session != null) {
         try {
           session.close();
         } catch (JMSException e) {
-          LOG.error("Error cleaning up ActiveMQ resources", e);
+          //LOG.error("Error cleaning up ActiveMQ resources", e);
         }
       }
 
@@ -172,7 +172,7 @@ public class TruckEventRuleEngine implements Serializable {
       topicProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
       return topicProducer;
     } catch (JMSException e) {
-      LOG.error("Error creating producer for topic", e);
+      //LOG.error("Error creating producer for topic", e);
       throw new RuntimeException("Error creating producer for topic");
     }
   }
@@ -187,7 +187,7 @@ public class TruckEventRuleEngine implements Serializable {
       Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
       return session;
     } catch (JMSException e) {
-      LOG.error("Error configuring ActiveMQConnection and getting session", e);
+      //LOG.error("Error configuring ActiveMQConnection and getting session", e);
       throw new RuntimeException("Error configuring ActiveMQConnection");
     }
   }

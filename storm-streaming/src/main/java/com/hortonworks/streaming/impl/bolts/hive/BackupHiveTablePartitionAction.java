@@ -19,7 +19,7 @@ public class BackupHiveTablePartitionAction implements RotationAction {
 
   private static final long serialVersionUID = 2725320320183384402L;
 
-  private static final Logger LOG = Logger.getLogger(BackupHiveTablePartitionAction.class);
+  //private static final Logger LOG = Logger.getLogger(BackupHiveTablePartitionAction.class);
   private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
   private String sourceMetastoreUrl;
@@ -50,8 +50,8 @@ public class BackupHiveTablePartitionAction implements RotationAction {
 
     String fileNameWithSchema = sourceFSrl + filePath.toString();
 
-    LOG.info("About to add file[" + fileNameWithSchema + "] to a partitions[date=" + datePartitionName + ", hour=" +
-        hourPartitionName + "]");
+    //LOG.info("About to add file[" + fileNameWithSchema + "] to a partitions[date=" + datePartitionName + ", hour=" +
+        //hourPartitionName + "]");
     addFileToPartition(fileNameWithSchema, datePartitionName, hourPartitionName);
 
   }
@@ -76,7 +76,7 @@ public class BackupHiveTablePartitionAction implements RotationAction {
 
   private void addFileToPartition(String fileNameWithSchema, String datePartitionName, String hourPartitionName) {
 
-    LOG.info("adding datePartition[" + datePartitionName + "], hourPartition[" + hourPartitionName + "]");
+    //LOG.info("adding datePartition[" + datePartitionName + "], hourPartition[" + hourPartitionName + "]");
 
     loadData(fileNameWithSchema, datePartitionName, hourPartitionName);
 
@@ -98,7 +98,7 @@ public class BackupHiveTablePartitionAction implements RotationAction {
       execHiveDDL(ddl.toString());
     } catch (Exception e) {
       String errorMessage = "Error exexcuting query[" + ddl.toString() + "]";
-      LOG.error(errorMessage, e);
+      //LOG.error(errorMessage, e);
       throw new RuntimeException(errorMessage, e);
     }
   }
@@ -113,7 +113,7 @@ public class BackupHiveTablePartitionAction implements RotationAction {
   }
 
   public void execHiveDDL(String ddl) throws Exception {
-    LOG.info("Executing ddl = " + ddl);
+    //LOG.info("Executing ddl = " + ddl);
 
     Driver hiveDriver = new Driver();
     CommandProcessorResponse response = hiveDriver.run(ddl);

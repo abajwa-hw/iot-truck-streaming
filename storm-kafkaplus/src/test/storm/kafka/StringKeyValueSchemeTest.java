@@ -1,6 +1,6 @@
 package storm.kafka;
 
-import org.apache.storm.tuple.Fields;
+import backtype.storm.tuple.Fields;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
 

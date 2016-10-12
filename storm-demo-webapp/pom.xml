@@ -10,7 +10,13 @@
 	<properties>
 		<org.springframework-version>4.0.0.BUILD-SNAPSHOT</org.springframework-version>
 		<org.springframework.security-version>3.2.0.RC2</org.springframework.security-version>
-		<hbase.version>0.98.4.2.2.0.0-2041-hadoop2</hbase.version>
+		
+		<!-- <org.springframework-version>4.0.7.RELEASE</org.springframework-version> 
+			<org.springframework.security-version>3.2.5.RELEASE</org.springframework.security-version> -->
+		 
+
+		
+		<hbase.version>1.1.2.2.5.0.0-1245</hbase.version>
 		<junit.version>4.5</junit.version>
 		<stream.simulator.version>1.0-SNAPSHOT</stream.simulator.version>
 	</properties>
@@ -247,7 +253,8 @@
 				<!-- use 9.0.6 for java 7 -->
 				<!-- <version>9.0.6.v20130930</version> -->
 				<!-- use 9.3.11 for java 8 -->
-				<version>9.3.11.v20160721</version>
+				<version>9.3.11.v20160721</version> 
+				<!-- <version>9.1.2.v20140210</version>  -->
 				<configuration>			
 					<webApp>
 						<contextPath>/storm-demo-web-app</contextPath>
